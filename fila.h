@@ -1,18 +1,20 @@
 #ifndef _FILA_H
 #define _FILA_H
 
-struct cliente
+int raiz;
+
+typedef struct cliente
 {
 	int c,o,v;
-};
+}cliente;
 
 typedef struct fila fila;
 
-cliente* criafila(void);
-void push(flia *fila, cliente x);
+fila* criafila(void);
+void push(fila *fila, cliente x);
 void pop(fila *fila);
-void front();
-int vazia(void);
-int cheia(void);
+cliente front(fila *fila);
+int vazia(fila *fila);
+int cheia(fila *fila);
 
 #endif
