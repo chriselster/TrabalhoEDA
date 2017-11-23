@@ -1,51 +1,57 @@
 #include "fila.h"
+#include <stdlib.h>
 
-int frente,fundo,n;
-int *fila;
 
 struct fila
 {
 	int frente,fundo,tam;
-	struct cliente v[n];
+	cliente* v;
 };
 
 
-
-
 fila* criafila(void){
-	fila *x = (fila*) malloc(sizeof(struct fila));
+	cliente* a= (cliente*) malloc(raiz*sizeof(cliente));
+	fila* x= (fila*) malloc(sizeof(fila));
 	if (x!=NULL){
-		x.frente=0;
-		x.fundo=0;
-		x.tam=0;
+		x->frente=0;
+		x->fundo=0;
+		x->tam=0;
+		x->v=a;
 	}
 	return x;
 }
 
-void push(flia *fila, cliente x){
+void push(fila *fila, cliente x){
 	if (fila==NULL)return;
 	if(!cheia(fila)){
-		fila.v[fila.fundo] = x;
-		fila.fundo++;
-		if (fila.fundo == n)fila.fundo=0;
-		fila.tam++;
+		fila->v[fila->fundo] = x;
+		fila->fundo++;
+		if (fila->fundo == raiz)fila->fundo=0;
+		fila->tam++;
 	}
 	return;
 }
 
 
-void pop(void){
+void pop(fila *fila){
 	if (fila==NULL)return;
-	if (!fila.vazia()){	
-		fila.frente++;
-		if (fila.frente==n)frente=0;
-		fila.tam--;
+	if (!vazia(fila)){	
+		fila->frente++;
+		if (fila->frente==raiz)fila->frente=0;
+		fila->tam--;
 	}
 	return;
 }
-int vazia(flia *fila){
-	return fila.frente==fila.fundo;
+
+cliente front(fila *fila){
+	return fila->v[fila->frente];
+
 }
-int cheia(flia *fila){
-	return (u+1)%n==p;
+
+int vazia(fila *fila){
+	return fila->frente==fila->fundo;
+}
+
+int cheia(fila *fila){
+	return (fila->fundo+1)%raiz==fila->frente;
 }
