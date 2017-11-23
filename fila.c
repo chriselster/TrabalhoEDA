@@ -53,5 +53,9 @@ int vazia(fila *fila){
 }
 
 int cheia(fila *fila){
-	return (fila->fundo+1)%raiz==fila->frente;
+	int a=(fila->fundo+1), b=fila->frente;
+	if (a==raiz){
+		a=0;
+	}
+	return a==b;
 }
