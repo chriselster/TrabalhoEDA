@@ -5,7 +5,7 @@ int raiz;
 
 typedef struct cliente
 {
-	int c,o,v;
+	int c,q,s;
 }cliente;
 
 typedef struct fila fila;
