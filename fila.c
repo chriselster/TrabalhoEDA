@@ -3,31 +3,31 @@
 
 Fila* f;
 
-void criafila(int tam){
+void criafila(int tam){			//Função de iniciar fila
 	int i, raiz;
 	for (i=1; i*i<=tam; i++) raiz = i;
 	f = (Fila*) malloc(sizeof(Fila));
 	if (f!=NULL){
-		f->front=0;
+		f->front=-1;
 		f->end=-1;
-		f->tam=-1;
+		f->tam=0;
 		f->cap=raiz;
 		f->c=(Cliente*) malloc(raiz*sizeof(Cliente));
 	}
 }
 
-int vazia(){
-	return f->front==f->end;
+int fila_vazia(){					//Função para checar se a fila está vazia
+	return f->front == -1 || f->front>f->end;
 }
 
-int cheia(){
+int fila_cheia(){					//Função para checar se a fila está cheia
 	return f->end==f->cap-1;
 }
 
-void push(Cliente c){
+void push_fila(Cliente c){				//Adiciona cliente na fila
 	if (f==NULL) return;
-	if (vazia()) f->front++;
-	if (!cheia()){
+	if (fila_vazia()) f->front++;
+	if (!fila_cheia()){
 		f->end++;
 		if (f->end == f->cap) f->end=0;
 		f->c[f->end] = c;
@@ -35,24 +35,18 @@ void push(Cliente c){
 	}
 }
 
-void imprime() {
-	int i, cont=f->front;
-}
-/*
-
-void pop(fila *fila){
-	if (fila==NULL)return;
-	if (!vazia(fila)){	
-		fila->frente++;
-		if (fila->frente==raiz)fila->frente=0;
-		fila->tam--;
+void pop_fila(){						//Retira cliente da fila
+	if (f==NULL)return;
+	if (!fila_vazia()){	
+		f->front++;
+		if (f->front==f->cap) f->front=0;
+		f->tam--;
 	}
-	return;
 }
 
-cliente front(fila *fila){
-	return fila->v[fila->frente];
+Cliente frente(){				//Retorna o primeiro da fila
+	return f->c[f->front];
 
 }
 
-*/
+

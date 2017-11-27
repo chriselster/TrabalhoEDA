@@ -2,7 +2,7 @@
 #define _FILA_H
 
 typedef struct cliente {
-	int cod, op, val;
+	int cod, qtd, saldo;
 } Cliente;
 
 typedef struct fila {
@@ -11,14 +11,11 @@ typedef struct fila {
 } Fila;
 
 void criafila(int tam);
-int vazia();
-int cheia();
+int fila_vazia();
+int fila_cheia();
+void push_fila(Cliente c);
+void pop_fila();
+Cliente frente();
 
-void push(Cliente c);
-void imprime();
-/*void pop(fila *fila);
-cliente front(fila *fila);
-
-*/
 #endif
 
