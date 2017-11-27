@@ -1,8 +1,8 @@
-all: cliente.o pilha.o fila.o trabalho.o 
-	gcc -g trabalho.o fila.o pilha.o cliente.o -o trabalho -Wall
+all: cliente.o caixa.o fila.o trabalho.o 
+	gcc -g trabalho.o fila.o caixa.o cliente.o -o trabalho -Wall
 	rm -f *.o
-pilha.o:
-	gcc -g -c pilha.c
+caixa.o:
+	gcc -g -c caixa.c
 trabalho.o:
 	gcc -g -c trabalho.c
 fila.o:
