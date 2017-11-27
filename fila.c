@@ -1,37 +1,44 @@
 #include "fila.h"
 #include <stdlib.h>
 
+Fila* f;
 
-struct fila
-{
-	int frente,fundo,tam;
-	cliente* v;
-};
-
-
-fila* criafila(void){
-	cliente* a= (cliente*) malloc(raiz*sizeof(cliente));
-	fila* x= (fila*) malloc(sizeof(fila));
-	if (x!=NULL){
-		x->frente=0;
-		x->fundo=0;
-		x->tam=0;
-		x->v=a;
+void criafila(int tam){
+	int i, raiz;
+	for (i=1; i*i<=tam; i++) raiz = i;
+	f = (Fila*) malloc(sizeof(Fila));
+	if (f!=NULL){
+		f->front=0;
+		f->end=-1;
+		f->tam=-1;
+		f->cap=raiz;
+		f->c=(Cliente*) malloc(raiz*sizeof(Cliente));
 	}
-	return x;
 }
 
-void push(fila *fila, cliente x){
-	if (fila==NULL)return;
-	if(!cheia(fila)){
-		fila->v[fila->fundo] = x;
-		fila->fundo++;
-		if (fila->fundo == raiz)fila->fundo=0;
-		fila->tam++;
-	}
-	return;
+int vazia(){
+	return f->front==f->end;
 }
 
+int cheia(){
+	return f->end==f->cap-1;
+}
+
+void push(Cliente c){
+	if (f==NULL) return;
+	if (vazia()) f->front++;
+	if (!cheia()){
+		f->end++;
+		if (f->end == f->cap) f->end=0;
+		f->c[f->end] = c;
+		f->tam++;
+	}
+}
+
+void imprime() {
+	int i, cont=f->front;
+}
+/*
 
 void pop(fila *fila){
 	if (fila==NULL)return;
@@ -48,14 +55,4 @@ cliente front(fila *fila){
 
 }
 
-int vazia(fila *fila){
-	return fila->frente==fila->fundo;
-}
-
-int cheia(fila *fila){
-	int a=(fila->fundo+1), b=fila->frente;
-	if (a==raiz){
-		a=0;
-	}
-	return a==b;
-}
+*/
