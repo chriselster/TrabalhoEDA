@@ -1,20 +1,15 @@
 #ifndef _FILA_H
 #define _FILA_H
+#include "cliente.h"
 
-int raiz;
+typedef struct fila Fila;
 
-typedef struct cliente
-{
-	int c,q,s;
-}cliente;
-
-typedef struct fila fila;
-
-fila* criafila(void);
-void push(fila *fila, cliente x);
-void pop(fila *fila);
-cliente front(fila *fila);
-int vazia(fila *fila);
-int cheia(fila *fila);
+void criafila(int tam);
+int fila_vazia();
+int fila_cheia();
+void push_fila(int cod, int qtd, int saldo, Cliente (*criar) (int, int, int));
+void pop_fila();
+Cliente frente();
 
 #endif
+

@@ -1,11 +1,11 @@
-all: fila
-fila: fila.o trabalho.o 
-	gcc -o trabalho fila.o trabalho.o
-fila.o: fila.c
-	gcc -o fila.o -c fila.c -W -Wall 
-trabalho.o: trabalho.c fila.h
-	gcc -o trabalho.o -c trabalho.c -W -Wall 
-clean:
-	rm -rf *.o
-mrproper: clean
-	rm -rf fila
+all: cliente.o caixa.o fila.o trabalho.o 
+	gcc -g trabalho.o fila.o caixa.o cliente.o -o trabalho -Wall
+	rm -f *.o
+caixa.o:
+	gcc -g -c caixa.c
+trabalho.o:
+	gcc -g -c trabalho.c
+fila.o:
+	gcc -g -c fila.c
+cliente.o:
+	gcc -g -c cliente.c

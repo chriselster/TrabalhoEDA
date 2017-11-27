@@ -1,61 +1,59 @@
+#include "cliente.h"
 #include "fila.h"
 #include <stdlib.h>
 
-
-struct fila
-{
-	int frente,fundo,tam;
-	cliente* v;
+struct fila {
+	int front, end, tam, cap;
+	Cliente* c;
 };
 
+Fila* f;
 
-fila* criafila(void){
-	cliente* a= (cliente*) malloc(raiz*sizeof(cliente));
-	fila* x= (fila*) malloc(sizeof(fila));
-	if (x!=NULL){
-		x->frente=0;
-		x->fundo=0;
-		x->tam=0;
-		x->v=a;
+void criafila(int tam){			//Função de iniciar fila
+	int i, raiz;
+	for (i=1; i*i<=tam; i++) raiz = i;
+	f = (Fila*) malloc(sizeof(Fila));
+	if (f!=NULL){
+		f->front=-1;
+		f->end=-1;
+		f->tam=0;
+		f->cap=raiz;
+		f->c=(Cliente*) malloc(raiz*sizeof(Cliente));
 	}
-	return x;
 }
 
-void push(fila *fila, cliente x){
-	if (fila==NULL)return;
-	if(!cheia(fila)){
-		fila->v[fila->fundo] = x;
-		fila->fundo++;
-		if (fila->fundo == raiz)fila->fundo=0;
-		fila->tam++;
+int fila_vazia(){					//Função para checar se a fila está vazia
+	return f->front == -1 || f->front>f->end;
+}
+
+int fila_cheia(){					//Função para checar se a fila está cheia
+	return f->end==f->cap-1;
+}
+
+void push_fila(int cod, int qtd, int saldo, Cliente (*criar) (int, int, int)){				//Adiciona cliente na fila
+	if (f==NULL) return;
+	if (fila_vazia()) f->front++;
+	if (!fila_cheia()){
+		Cliente c = (*criar)(cod, qtd, saldo);
+		f->end++;
+		if (f->end == f->cap) f->end=0;
+		f->c[f->end] = c;
+		f->tam++;
 	}
-	return;
 }
 
-
-void pop(fila *fila){
-	if (fila==NULL)return;
-	if (!vazia(fila)){	
-		fila->frente++;
-		if (fila->frente==raiz)fila->frente=0;
-		fila->tam--;
+void pop_fila(){						//Retira cliente da fila
+	if (f==NULL)return;
+	if (!fila_vazia()){	
+		f->front++;
+		if (f->front==f->cap) f->front=0;
+		f->tam--;
 	}
-	return;
 }
 
-cliente front(fila *fila){
-	return fila->v[fila->frente];
+Cliente frente(){				//Retorna o primeiro da fila
+	return f->c[f->front];
 
 }
 
-int vazia(fila *fila){
-	return fila->frente==fila->fundo;
-}
 
-int cheia(fila *fila){
-	int a=(fila->fundo+1), b=fila->frente;
-	if (a==raiz){
-		a=0;
-	}
-	return a==b;
-}
