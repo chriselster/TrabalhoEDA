@@ -1,5 +1,11 @@
+#include "cliente.h"
 #include "fila.h"
 #include <stdlib.h>
+
+struct fila {
+	int front, end, tam, cap;
+	Cliente* c;
+};
 
 Fila* f;
 
@@ -24,10 +30,11 @@ int fila_cheia(){					//Função para checar se a fila está cheia
 	return f->end==f->cap-1;
 }
 
-void push_fila(Cliente c){				//Adiciona cliente na fila
+void push_fila(int cod, int qtd, int saldo, Cliente (*criar) (int, int, int)){				//Adiciona cliente na fila
 	if (f==NULL) return;
 	if (fila_vazia()) f->front++;
 	if (!fila_cheia()){
+		Cliente c = (*criar)(cod, qtd, saldo);
 		f->end++;
 		if (f->end == f->cap) f->end=0;
 		f->c[f->end] = c;
