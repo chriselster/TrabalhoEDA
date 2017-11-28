@@ -1,58 +1,82 @@
 #include "cliente.h"
 #include "relatorio.h"
 #include <stdlib.h>
-
-
-
-struct node
-{
-	int cod,qtd,saldo;
-	Node* prox, ant;
-};
-
-
-Node* atual,ini;
+#include <stdio.h>
 
 void push_relatorio(Cliente a){	//Adiciona nó no relatório
-	 //criar novo
+	if (a.op){				//se op=1(saque) o valor se torna negativo
+		a.valor=-(a.valor);
+	}
 
-	//consulta(cod); Vê se cod já existe
-
-	novo->cod = cod;
-	novo->qtd = 1;
-	novo->saldo += valor;
-	if (atual==NULL){ 
+	if (atual==NULL){ 		//se o relatório estiver vazio adiciona novo nó
+		Node* novo=(Node*)malloc(sizeof(Node));
+		novo->cod=a.cod;
+		novo->qtd=1;
+		novo->saldo=a.valor;
 		novo->prox = novo->ant = NULL;
-		atual=novo;
-		ini = novo;
-		
+		atual = novo;
+		ini = novo;	
 		return;
 	}
 
-	if(atual->cod > cod){
-		for(; atual->ant != NULL && cod > atual->ant->cod; atual=atual->ant);
-			Node aux=atual->ant;
+	if (atual->cod == a.cod){
+		atual->qtd++;
+		atual->saldo += a.valor;
+		return;
+	}
 
-		if(aux){
-			aux->prox=novo;
-			novo->ant=aux;
-			atual->ant=novo;
-			novo->prox=atual;
-			atual=novo;
-			return;
-		}else{
-			atual->ant=novo;
-			novo->prox=atual;
-			atual=novo;
-			ini=novo;
-			return;
-		}
+
+	if(atual->cod > a.cod){		//se o código do cliente à ser inserido for inferior ao qual o relatório aponta
+		for(; atual->ant != NULL && a.cod < atual->ant->cod; atual=atual->ant);	//busca entre os valores inferiores
+			Node *aux= atual->ant;
+			if(aux){
+			printf("3: %d\n", a.cod);					//se o anterior existe
+				if (aux->cod==a.cod){	//se o código do anterior for igual ao do novo cliente
+					aux->qtd++;			//incremente quatidade de operações
+					aux->saldo += a.valor;	//atualiza saldo
+					atual=aux;			//relatório aponta para onde ocorreu a alteração
+					return;
+				}
+				Node* novo=(Node*)malloc(sizeof(Node));
+				novo->cod=a.cod;
+				novo->qtd=1;
+				novo->saldo=a.valor;
+				aux->prox=novo;
+				novo->ant=aux;
+				atual->ant=novo;
+				novo->prox=atual;
+				atual=novo;
+				return;
+			}else{
+				printf("4: %d\n", a.cod);
+				Node* novo=(Node*)malloc(sizeof(Node));
+				novo->cod=a.cod;
+				novo->qtd=1;
+				novo->saldo=a.valor;	
+				atual->ant=novo;
+				novo->prox=atual;
+				novo->ant=NULL;
+				atual=novo;
+				ini=novo;
+				return;
+			}
+		
 	}else{
 
-		for(; atual->prox != NULL && cod < atual->prox->cod; atual=atual->prox);
-				Node aux=atual->prox;
-
-			if(prox){
+		for(; atual->prox != NULL && a.cod > atual->prox->cod; atual=atual->prox);	//busca entre os valores superiores
+			Node *aux=atual->prox;
+			if(aux){
+				printf("1: %d\n", a.cod);
+				if (aux->cod==a.cod){
+					aux->qtd++;
+					aux->saldo += a.valor;
+					atual=aux;
+					return;			
+				}
+				Node* novo=(Node*)malloc(sizeof(Node));
+				novo->cod=a.cod;
+				novo->qtd=1;
+				novo->saldo=a.valor;
 				aux->ant=novo;
 				novo->prox=aux;
 				atual->prox=novo;
@@ -60,36 +84,17 @@ void push_relatorio(Cliente a){	//Adiciona nó no relatório
 				atual=novo;
 				return;
 			}else{
+				printf("2: %d\n", a.cod);
+				Node* novo=(Node*)malloc(sizeof(Node));
+				novo->cod=a.cod;
+				novo->qtd=1;
+				novo->saldo=a.valor;
 				atual->prox=novo;
 				novo->ant=atual;
+				novo->prox=NULL;
 				atual=novo;
 				return;
 			}
 		}
-
-
-	//criar função pra descobrir onde adicionar
-	if (atual)
-	{
-		if (novo->cod>atual->cod){
-			while(novo->cod>atual->prox->cod){
-				atual=atual->prox;
-			}
-			if (novo->cod==atual->prox->cod)
-			{
-				atual->prox->cod//faz operações lá
-			}else{
-				Node* aux=atual->prox;
-				atual->prox= novo;
-				novo->prox=aux;
-				aux->ant= novo;
-				novo->ant=atual;
-			}
-		}
-	}else
-
-
-	//atual aponta para anterior
-
 	
 }

@@ -2,11 +2,15 @@
 #define _RELATORIO_H
 #include "cliente.h"
 
-typedef struct node Node;
 
-typedef struct relatorio Relatorio;
+typedef struct node
+{
+	int cod,qtd,saldo;
+	struct node *prox, *ant;
+} Node;
 
-void criarelatorio(void);
-void push_relatorio(int cod, int qtd, int saldo, int pos, Node (*criar) (int, int, int));
+Node *atual,*ini;
+
+void push_relatorio(Cliente a);
 
 #endif
