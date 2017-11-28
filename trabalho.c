@@ -12,10 +12,8 @@
 
 	for (int i = 0; i < n; ++i)
 	{
-		cliente x;
-		x.qtd=0;
-		x.saldo=0;
 		int o,v;
+		cliente x;
 		scanf("%d %d %d",&x.c,&o,&v);
 		push(x);
 		if (filaCheia())
