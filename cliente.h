@@ -2,10 +2,10 @@
 #define _CLIENTE_H
 
 typedef struct cliente {
-	int cod, qtd, saldo;
+	int cod, op, valor;
 } Cliente;
 
-Cliente cria_cliente(int cod, int qtd, int saldo);
+Cliente cria_cliente(int cod, int op, int valor);
 
 #endif
 

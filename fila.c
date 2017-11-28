@@ -34,7 +34,7 @@ void push_fila(int cod, int qtd, int saldo, Cliente (*criar) (int, int, int)){		
 	if (f==NULL) return;
 	if (fila_vazia()) f->front++;
 	if (!fila_cheia()){
-		Cliente c = (*criar)(cod, qtd, saldo);
+		Cliente c = (*criar)(cod, op, valor);
 		f->end++;
 		if (f->end == f->cap) f->end=0;
 		f->c[f->end] = c;
