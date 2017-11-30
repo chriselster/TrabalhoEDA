@@ -1,16 +1,10 @@
 #ifndef _RELATORIO_H
 #define _RELATORIO_H
-#include "cliente.h"
 
-
-typedef struct node
-{
-	int cod,qtd,saldo;
-	struct node *prox, *ant;
-} Node;
-
-Node *atual,*ini;
+typedef struct node Node;
+typedef struct cliente Cliente;
 
 void push_relatorio(Cliente a);
+void relatorio();
 
 #endif
