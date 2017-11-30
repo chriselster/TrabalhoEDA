@@ -1,5 +1,4 @@
 # TrabalhoEDA
-À fazer:
+A GENTE É FODA CARALHOOOOO!!!1!111!!
 
-    []Função de enviar um usuário para atendimeno
-    []Função para imprimir relatório
+Só falta comentar as porra toda, comenta nos caixa e fila q eu comento no trabalho e relatório paz irmãos

@@ -1,3 +1,5 @@
+//MATA40 - Christian Elster e Igor de Almeida
+
 #include "relatorio.h"
 #include "fila.h"
 #include "caixa.h"
@@ -12,13 +14,14 @@ void read(){
 	criacaixa(n, m);
 	
 	for (i = 1; i <= n; ++i) {
-		if (!fila_cheia()) {
 			int cod, op, val;
 			scanf("%d %d %d", &cod, &op, &val);
+		if (!fila_cheia()) {
 			push_fila(cod, op, val);
 			if (fila_cheia()) atende();
 		} 
 	}
+	atende();
 		
 	return;
 }

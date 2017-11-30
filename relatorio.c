@@ -7,7 +7,8 @@ struct cliente {
 };
 
 struct node {
-	int cod,qtd,saldo;
+	int cod,qtd;
+	long saldo;
 	struct node *prox, *ant;
 };
 
@@ -16,13 +17,13 @@ int L = 0;
 Node *atual,*ini;
 
 void push_relatorio(Cliente a){	//Adiciona nó no relatório
-	if (a.cod > L) L = a.cod;
 	
 	if (a.op){				//se op=1(saque) o valor se torna negativo
 		a.valor=-(a.valor);
 	}
 
 	if (atual==NULL){ 		//se o relatório estiver vazio adiciona novo nó
+		L++;
 		Node* novo=(Node*)malloc(sizeof(Node));
 		novo->cod=a.cod;
 		novo->qtd=1;
@@ -49,6 +50,7 @@ void push_relatorio(Cliente a){	//Adiciona nó no relatório
 					atual=aux;			//relatório aponta para onde ocorreu a alteração
 					return;
 				}
+				L++;
 				Node* novo=(Node*)malloc(sizeof(Node));
 				novo->cod=a.cod;
 				novo->qtd=1;
@@ -60,6 +62,7 @@ void push_relatorio(Cliente a){	//Adiciona nó no relatório
 				atual=novo;
 				return;
 			}else{
+				L++;
 				Node* novo=(Node*)malloc(sizeof(Node));
 				novo->cod=a.cod;
 				novo->qtd=1;
@@ -83,6 +86,7 @@ void push_relatorio(Cliente a){	//Adiciona nó no relatório
 					atual=aux;
 					return;			
 				}
+				L++;
 				Node* novo=(Node*)malloc(sizeof(Node));
 				novo->cod=a.cod;
 				novo->qtd=1;
@@ -94,6 +98,7 @@ void push_relatorio(Cliente a){	//Adiciona nó no relatório
 				atual=novo;
 				return;
 			}else{
+				L++;
 				Node* novo=(Node*)malloc(sizeof(Node));
 				novo->cod=a.cod;
 				novo->qtd=1;
@@ -111,9 +116,8 @@ void relatorio() {
 	printf("%d\n", L);
 	Node* aux = ini;
 	while (aux != NULL) {
-		printf("%d %d %d\n", aux->cod, aux->qtd, aux->saldo);
+		printf("%d %d %ld\n", aux->cod, aux->qtd, aux->saldo);
 		aux = aux->prox;
 	}
-	printf("\n");
 }
 
