@@ -1,9 +1,13 @@
 #ifndef _FILA_H
 #define _FILA_H
-#include<stdio.h>
+#include <stdlib.h>
+
+// Declara structs
 
 typedef struct fila Fila;
 typedef struct cliente Cliente;
+
+// Declara funcoes
 
 void criafila(int tam);
 int fila_vazia();

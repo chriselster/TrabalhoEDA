@@ -1,9 +1,13 @@
 #ifndef _CAIXA_H
 #define _CAIXA_H
-#include <stdio.h>
+#include <stdlib.h>
+
+// Declara structs
 
 typedef struct caixa Caixa;
 typedef struct cliente Cliente;
+
+// Declara funcoes
 
 void criacaixa(int qtd_clientes, int qtd_caixas);
 int caixa_vazio(Caixa c);

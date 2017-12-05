@@ -2,16 +2,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct cliente
-{
-	int cod, op, valor; //cod: código do cliente, op: operação feita, valor da operação
+struct cliente {
+	int cod, op, valor; 
 };
 
-struct node
-{							 //nó para lista duplamente encadeada
-	int cod, qtd;			 //cod: código do cliente, qtd: quantidade total de operações
-	long saldo;				 //saldo final do cliente
-	struct node *prox, *ant; //ponteiros para nó seguinte e para o anterior
+struct node {							 
+	int cod, qtd;			 
+	long long saldo;				 
+	Node *prox, *ant; 
 };
 
 int L = 0;		   //contador do número de clientes adicionados ao relatório
@@ -143,7 +141,7 @@ void relatorio()
 	Node *aux = ini;   //ponteiro auxiliar aponta para o primeiro elemento da lista
 	while (aux != NULL)
 	{														   //enquanto o auxiliar não apontar para NULL
-		printf("%d %d %ld\n", aux->cod, aux->qtd, aux->saldo); //imprime informações do nó apontado e quebra de linha
+		printf("%d %d %lld\n", aux->cod, aux->qtd, aux->saldo); //imprime informações do nó apontado e quebra de linha
 		aux = aux->prox;									   //nó auxiliar passa a apontar para o nó seguinte
 	}
 }

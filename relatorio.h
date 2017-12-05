@@ -1,12 +1,13 @@
 #ifndef _RELATORIO_H
 #define _RELATORIO_H
+#include <stdlib.h>
 
-//inicializa structs de nó e cliente
+// Declara structs
 
 typedef struct node Node;
 typedef struct cliente Cliente;
 
-//inicializa funções
+// Declara funcoes
 
 void push_relatorio(Cliente a);
 void relatorio();
