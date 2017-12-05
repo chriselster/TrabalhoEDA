@@ -47,8 +47,7 @@ void push_relatorio(Cliente a)
 
 	if (atual->cod > a.cod)
 	{ //se o código do cliente a ser inserido for inferior ao qual o relatório aponta
-		for (; atual->ant != NULL && a.cod < atual->ant->cod; atual = atual->ant)
-			; //busca entre os valores inferiores
+		for (; atual->ant != NULL && a.cod < atual->ant->cod; atual = atual->ant); //busca entre os valores inferiores
 
 		/*O loop para se encontrar a extremidade da lista ou se o valor do 
 			cliente anterior for menor ou igual ao do cliente a ser adicionado, de qualquer forma
@@ -94,8 +93,7 @@ void push_relatorio(Cliente a)
 	else
 	{
 
-		for (; atual->prox != NULL && a.cod > atual->prox->cod; atual = atual->prox)
-			; //busca entre os valores superiores
+		for (; atual->prox != NULL && a.cod > atual->prox->cod; atual = atual->prox); //busca entre os valores superiores
 
 		/*O loop para se encontrar a extremidade da lista ou se o valor do próximo
 			cliente for maior ou igual ao do cliente a ser adicionado, de qualquer forma
