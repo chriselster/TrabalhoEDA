@@ -15,16 +15,13 @@ struct node {
 int L = 0;		   //contador do número de clientes adicionados ao relatório
 Node *atual, *ini; //nó atual aponta para a última modificação e ini sempre para o começo da lista
 
-void push_relatorio(Cliente a)
-{ //Adiciona nó no relatório a partir das informações do cliente "a"
+void push_relatorio(Cliente a){ 				   //Adiciona nó no relatório a partir das informações do cliente "a"
 
-	if (a.op)
-	{ //se op=1(saque) o valor se torna negativo, senão permanece o mesmo
+	if (a.op){ 									   //se op=1(saque) o valor se torna negativo, senão permanece o mesmo
 		a.valor = -(a.valor);
 	}
 
-	if (atual == NULL)
-	{											   //se o relatório estiver vazio adiciona novo nó
+	if (atual == NULL){							   //se o relatório estiver vazio adiciona novo nó
 		L++;									   //incrementa contador
 		Node *novo = (Node *)malloc(sizeof(Node)); //aloca espaço para o novo nó
 		novo->cod = a.cod;						   //novo nó recebe código do cliente a
@@ -36,15 +33,13 @@ void push_relatorio(Cliente a)
 		return;
 	}
 
-	if (atual->cod == a.cod)
-	{							 //se o cliente a ser adicionado é aquele apontado por atual
+	if (atual->cod == a.cod){	 //se o cliente a ser adicionado é aquele apontado por atual
 		atual->qtd++;			 //incrementa a quantidade de operações desse cliente
 		atual->saldo += a.valor; //saldo é incrementado o valor da nova operação desse cliente (seja o valor positivo ou negativo)
 		return;
 	}
 
-	if (atual->cod > a.cod)
-	{ //se o código do cliente a ser inserido for inferior ao qual o relatório aponta
+	if (atual->cod > a.cod){ 	 //se o código do cliente a ser inserido for inferior ao qual o relatório aponta
 		for (; atual->ant != NULL && a.cod < atual->ant->cod; atual = atual->ant); //busca entre os valores inferiores
 
 		/*O loop para se encontrar a extremidade da lista ou se o valor do 
@@ -52,10 +47,8 @@ void push_relatorio(Cliente a)
 			o novo cliente será adicionado na posição anterior àquela do ponteiro atual*/
 
 		Node *aux = atual->ant; //ponteiro auxilhar aponta para o nó anterior àquele apontado por atual
-		if (aux)
-		{ //se aux != NULL
-			if (aux->cod == a.cod)
-			{						   //se o código do anterior for igual ao do novo cliente
+		if (aux)	{ 				   //se aux != NULL
+			if (aux->cod == a.cod){	   //se o código do anterior for igual ao do novo cliente
 				aux->qtd++;			   //incrementa a quatidade de operações
 				aux->saldo += a.valor; //atualiza saldo
 				atual = aux;		   //atual aponta para a última modificação
@@ -73,8 +66,7 @@ void push_relatorio(Cliente a)
 			atual = novo;							   //atual aponta para a última modificação
 			return;
 		}
-		else
-		{											   //se aux == NULL (chegou à extremidade inferior da lista encadeada)
+		else{	//se aux == NULL (chegou à extremidade inferior da lista encadeada)
 			Node *novo = (Node *)malloc(sizeof(Node)); //mesmo processo
 			L++;
 			novo->cod = a.cod;
@@ -88,8 +80,7 @@ void push_relatorio(Cliente a)
 			return;
 		}
 	}
-	else
-	{
+	else{	//se o código do cliente a ser inserido for superior ao qual o relatório aponta
 
 		for (; atual->prox != NULL && a.cod > atual->prox->cod; atual = atual->prox); //busca entre os valores superiores
 
@@ -98,10 +89,8 @@ void push_relatorio(Cliente a)
 			o novo cliente será adicionado na posição seguinte àquela do ponteiro atual*/
 
 		Node *aux = atual->prox; //ponteiro auxilhar aponta para o nó seguinte àquele apontado por atual
-		if (aux)
-		{ //se aux != NULL
-			if (aux->cod == a.cod)
-			{						   //se o código do próximo nó for igual ao do novo cliente
+		if (aux){ //se aux != NULL
+			if (aux->cod == a.cod){	   //se o código do próximo nó for igual ao do novo cliente
 				aux->qtd++;			   //incremente quatidade de operações
 				aux->saldo += a.valor; //atualiza saldo
 				atual = aux;		   //atual aponta para a última modificação
@@ -119,8 +108,7 @@ void push_relatorio(Cliente a)
 			atual = novo; //atual aponta para a última modificação
 			return;
 		}
-		else
-		{		 //se aux == NULL (chegou à extremidade superior da lista encadeada)
+		else{	 //se aux == NULL (chegou à extremidade superior da lista encadeada)
 			L++; //similar a quando chega na extremidade oposta, porém início não se altera
 			Node *novo = (Node *)malloc(sizeof(Node));
 			novo->cod = a.cod;
@@ -135,13 +123,11 @@ void push_relatorio(Cliente a)
 	}
 }
 
-void relatorio()
-{					   //função para imprimir o relatório
+void relatorio(){	   //função para imprimir o relatório
 	printf("%d\n", L); //imprime quantidade total de clientes que passaram pelo banco
 	Node *aux = ini;   //ponteiro auxiliar aponta para o primeiro elemento da lista
-	while (aux != NULL)
-	{														   //enquanto o auxiliar não apontar para NULL
+	while (aux != NULL){									    //enquanto o auxiliar não apontar para NULL
 		printf("%d %d %lld\n", aux->cod, aux->qtd, aux->saldo); //imprime informações do nó apontado e quebra de linha
-		aux = aux->prox;									   //nó auxiliar passa a apontar para o nó seguinte
+		aux = aux->prox;									    //nó auxiliar passa a apontar para o nó seguinte
 	}
 }
